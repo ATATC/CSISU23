@@ -1,7 +1,8 @@
 from abc import abstractmethod
 from copy import copy as _copy
 from random import choice as _choice
-from tictactoe.framework.board import Board as _Board
+from tictactoe.framework import Board as _Board
+from tictactoe.framework.rule import GameOver as _GameOver
 
 
 class Player(object):
@@ -46,4 +47,7 @@ class RandomPlayer(Player):
     This is for the unit tests.
     """
     def decide(self, board: _Board) -> [int, int]:
-        return _choice(board.blanks())
+        choices = board.blanks()
+        if len(choices) < 1:
+            raise _GameOver(None)
+        return _choice(choices)

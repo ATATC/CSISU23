@@ -82,11 +82,14 @@ class Board(object):
         """
         pass
 
+    def check_index(self, x: int, y: int, override: bool = False):
+        if x >= self._width or y >= self._height or (not override and self._p_map[y][x] != -1):
+            raise _InvalidStep
+
     def go(self, x: int, y: int, p_index: int, override: bool = False):
         self._check_p_index(p_index)
         self._rs.on_piece_down(x, y, p_index)
-        if x >= self._width or y >= self._height or (not override and self._p_map[y][x] != -1):
-            raise _InvalidStep
+        self.check_index(x, y, override)
         self._p_map[y][x] = p_index
         self._rc += 1
         self._rs.post_piece_down(x, y, p_index)

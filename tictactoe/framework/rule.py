@@ -9,6 +9,17 @@ class GameOver(Exception):
     def __init__(self, winner: Any):
         self.winner: Any = winner
 
+    def __str__(self) -> str:
+        return f"{self.winner} won!"
+
+
+class Surrender(Exception):
+    def __init__(self, loser: Any):
+        self.loser: Any = loser
+
+    def __str__(self) -> str:
+        return f"{self.loser} surrendered!"
+
 
 class Tied(GameOver):
     def __init__(self):

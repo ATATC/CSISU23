@@ -1,6 +1,6 @@
-from random import choice
+from random import choice as _choice
 from typing import Optional, Sequence, Callable
-from tictactoe.framework import RuleSet, Player, Tied, GameOver, Board, ProgramedPlayer, classic_index
+from tictactoe.framework import RuleSet, Player, Tied, GameOver, Surrender, Board, ProgramedPlayer, classic_index
 
 
 class TicTacToeRS(RuleSet):
@@ -82,8 +82,10 @@ class Bot(Player):
     """
 
     def decide(self, board: TicTacToeBoard) -> [int, int]:
+        if board.get_round_counter() >= 9:
+            raise Surrender(self._p_index)
         if board.get_round_counter() == 0:
-            return choice((0, 2)), choice((0, 2))
+            return _choice((0, 2)), _choice((0, 2))
         opi = 1 - self._p_index
         if board.get_round_counter() > 2:
             r = for_each_line(board, self._p_index, opi, defend)
@@ -102,7 +104,9 @@ class Bot(Player):
         if i == 3:
             return 0, 2
         r = for_each_line(board, self._p_index, opi, attack)
-        return (0, 0) if r is None else r
+        if r is None:
+            raise Surrender(self._p_index)
+        return r
 
 
 def rd2lines(rd: Sequence[tuple[int, int]]) -> list[str]:

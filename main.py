@@ -33,6 +33,9 @@ if __name__ == '__main__':
         except GameOver as e:
             print(board)
             print(f"{player_a if e.winner == 0 else player_b} won!")
+        except Surrender as e:
+            print(board)
+            print(f"{player_a if e.loser == 0 else player_b} surrendered!")
         if rd_dir_a is not None:
             with open(rd_dir_a, "w") as f:
                 f.write(linesep.join(rd2lines(player_a.get_recorded_decisions())))
