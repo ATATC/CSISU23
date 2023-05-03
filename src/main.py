@@ -8,7 +8,12 @@ linesep = "\n"
 
 if __name__ == '__main__':
     while True:
-        board = TicTacToeBoard(TicTacToeRS())
+        scale = input("Scale, 1 by default: >>>")
+        if scale.isnumeric():
+            scale = int(scale)
+        else:
+            scale = 1
+        board = TicTacToeBoard(TicTacToeRS(), horizontal_unit_sl=6 * scale + 3, vertical_unit_sl=3 * scale + 1)
         player_a, rd_dir_a = choose_player("A", 0)
         player_b, rd_dir_b = choose_player("B", 1)
         print("Indexes are shown as below:")
