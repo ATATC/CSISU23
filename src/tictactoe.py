@@ -16,10 +16,10 @@ class TicTacToeRS(RuleSet):
                         p_index: int):
         if self.board.get_round_counter() == self.board.get_width() * self.board.get_height():
             raise Tied()
-        if x == y and (self.board.diagonal(0, True).count(p_index)
-                       == min(self.board.get_width(), self.board.get_height())
-                       or self.board.diagonal(2, False).count(p_index)
-                       == min(self.board.get_width(), self.board.get_height())):
+        if (x + y) % 2 == 0 and (self.board.diagonal(0, True).count(p_index)
+                                 == min(self.board.get_width(), self.board.get_height())
+                                 or self.board.diagonal(2, False).count(p_index)
+                                 == min(self.board.get_width(), self.board.get_height())):
             raise GameOver(p_index)
         if self.board.row(y) == [p_index] * self.board.get_width() \
                 or self.board.column(x) == [p_index] * self.board.get_height():
@@ -84,6 +84,7 @@ class Bot(Player):
     """
     Works only when the board is 3x3.
     """
+
     def decide(self, board: TicTacToeBoard) -> [int, int]:
         if board.get_round_counter() == 0:
             return choice((0, 2)), choice((0, 2))
