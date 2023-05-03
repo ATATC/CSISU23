@@ -1,7 +1,8 @@
 from typing import Sequence
 from abc import abstractmethod
 from copy import copy as _copy
-from board import Board as _Board
+from src.framework.board import Board as _Board
+from random import choice as _choice
 
 
 class Player(object):
@@ -39,3 +40,11 @@ class ProgramedPlayer(Player):
     def decide(self, board: _Board) -> [int, int]:
         self._i += 1
         return self._decisions[self._i] if self._i < len(self._decisions) else self._player.decide(board)
+
+
+class RandomPlayer(Player):
+    """
+    This is for the unit tests.
+    """
+    def decide(self, board: _Board) -> [int, int]:
+        return _choice(board.blanks())

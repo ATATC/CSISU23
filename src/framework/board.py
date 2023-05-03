@@ -2,8 +2,8 @@ from abc import abstractmethod
 from copy import copy as _copy
 # from os import linesep as _linesep
 from typing import Optional, Callable
-from utils import AtomicInteger as _AtomicInteger
-from rule import RuleSet as _RuleSet, InvalidStep as _InvalidStep
+from .utils import AtomicInteger as _AtomicInteger
+from .rule import RuleSet as _RuleSet, InvalidStep as _InvalidStep
 
 
 _linesep = "\n"
@@ -25,7 +25,7 @@ class Board(object):
         self._height: int = height
         self._rs: _RuleSet = rule_set
         self._p_classes: int = p_classes
-        self._p_map: list[list[int]] = [([-1] * width) for _ in range(height)]
+        self._p_map: list[list[int]] = Board.new_p_map(width, height)
         self._hb: str = horizontal_border
         self._vb: str = vertical_border
         if horizontal_unit_sl % 2 != 1:
@@ -37,6 +37,21 @@ class Board(object):
         self._hm: int = horizontal_margin
         self._vm: int = vertical_margin
         self._rc: int = 0
+
+    @staticmethod
+    def new_p_map(width: int, height: int) -> list[list[int]]:
+        return [([-1] * width) for _ in range(height)]
+
+    def clear(self):
+        self._p_map = Board.new_p_map(self._width, self._height)
+
+    def convert_index(self, index: int) -> [int, int]:
+        """
+        Convert 1-D index to 2-D index.
+        :param index: 1-D index
+        :return: 2-D index
+        """
+        return index % self._width, index // self._width
 
     def get_width(self) -> int:
         return self._width
@@ -52,6 +67,11 @@ class Board(object):
 
     @abstractmethod
     def get_piece_symbol(self, p_index: int) -> str:
+        """
+        Convert the piece index into a character.
+        :param p_index: the piece index
+        :return: the character, a string with the length of 1
+        """
         pass
 
     def go(self, x: int, y: int, p_index: int, override: bool = False):
@@ -79,11 +99,34 @@ class Board(object):
                 break
         return r
 
+    def blanks(self) -> list[tuple[int, int]]:
+        """
+        Finds the indexes where the piece index equals -1.
+        :return: a list of 2-D indexes
+        """
+        i = 0
+        r = []
+        for row in self._p_map:
+            for p in row:
+                if p == -1:
+                    r.append(self.convert_index(i))
+                i += 1
+        return r
+
     def show_indexes(self) -> str:
+        """
+        Return a graph in string that displays the board filled with 1-D indexes.
+        :return: graph string
+        """
         i = _AtomicInteger(1)
         return self._show(lambda p_index: str(i.get_and_increment()), self._husl // 2, self._vusl // 2)
 
     def _check_p_index(self, p_index: int):
+        """
+        Check the piece index's legality.
+        :param p_index: the piece index
+        :raise: IndexError
+        """
         if p_index < 0 or p_index >= self._p_classes:
             raise IndexError(f"Piece index out of range (p_classes={self._p_classes}).")
 
@@ -91,12 +134,19 @@ class Board(object):
               symbolization: Optional[Callable] = None,
               horizontal_margin: int = 4,
               vertical_margin: int = 1) -> str:
+        """
+        Return a graph in string that displays the board.
+        :param symbolization: the function that converts piece indexes into characters
+        :param horizontal_margin: horizontal margin one on each side
+        :param vertical_margin: vertical margin one at the top and one at the bottom
+        :return: graph string
+        """
         s = r = (" " + self._hb * self._husl) * self._width + _linesep
-        for line in self._p_map:
+        for row in self._p_map:
             b = ((self._vb + " " * self._husl) * self._width + self._vb + _linesep) * vertical_margin
             s += b
             sp = ""
-            for p_index in line:
+            for p_index in row:
                 sp += self._vb + " " * horizontal_margin + (
                     self.get_piece_symbol
                     if symbolization is None

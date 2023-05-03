@@ -1,9 +1,6 @@
-from rule import *
-from board import *
-from player import *
 from random import choice
-from typing import Optional
-from utils import classic_index
+from typing import Optional, Sequence, Callable
+from framework import RuleSet, Player, Tied, GameOver, Board, ProgramedPlayer, classic_index
 
 
 class TicTacToeRS(RuleSet):
@@ -46,8 +43,7 @@ class TicTacToeBoard(Board):
 
 class HumanPlayer(Player):
     def decide(self, board: TicTacToeBoard) -> [int, int]:
-        i = int(input(f"{self.name}, your turn: >>>")) - 1
-        return i % board.get_width(), i // board.get_width()
+        return board.convert_index(int(input(f"{self.name}, your turn: >>>")) - 1)
 
 
 def valid_or_none(i: int) -> Optional[int]:
