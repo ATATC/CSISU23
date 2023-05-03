@@ -15,7 +15,7 @@ class TicTacToeRS(RuleSet):
                         y: int,
                         p_index: int):
         if self.board.get_round_counter() == self.board.get_width() * self.board.get_height():
-            raise Draw()
+            raise Tied()
         if x == y and (self.board.diagonal(0, True).count(p_index)
                        == min(self.board.get_width(), self.board.get_height())
                        or self.board.diagonal(2, False).count(p_index)

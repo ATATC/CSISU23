@@ -10,9 +10,9 @@ class GameOver(Exception):
         self.winner: Any = winner
 
 
-class Draw(GameOver):
+class Tied(GameOver):
     def __init__(self):
-        super(Draw, self).__init__(None)
+        super(Tied, self).__init__(None)
 
 
 class RuleSet(object):
