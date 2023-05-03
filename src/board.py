@@ -18,7 +18,9 @@ class Board(object):
                  horizontal_border: str = "-",
                  vertical_border: str = "|",
                  horizontal_unit_sl: int = 3,
-                 vertical_unit_sl: int = 3):
+                 vertical_unit_sl: int = 3,
+                 horizontal_margin: int = 4,
+                 vertical_margin: int = 1):
         self._width: int = width
         self._height: int = height
         self._rs: _RuleSet = rule_set
@@ -32,6 +34,8 @@ class Board(object):
         if vertical_unit_sl % 2 != 1:
             raise ValueError("Vertical unit side length should be an odd number.")
         self._vusl: int = vertical_unit_sl
+        self._hm: int = horizontal_margin
+        self._vm: int = vertical_margin
         self._rc: int = 0
 
     def get_width(self) -> int:
@@ -77,25 +81,29 @@ class Board(object):
 
     def show_indexes(self) -> str:
         i = _AtomicInteger(1)
-        return self._show(lambda p_index: str(i.get_and_increment()))
+        return self._show(lambda p_index: str(i.get_and_increment()), self._husl // 2, self._vusl // 2)
 
     def _check_p_index(self, p_index: int):
         if p_index < 0 or p_index >= self._p_classes:
             raise IndexError(f"Piece index out of range (p_classes={self._p_classes}).")
 
-    def _show(self, symbolization: Optional[Callable] = None) -> str:
+    def _show(self,
+              symbolization: Optional[Callable] = None,
+              horizontal_margin: int = 4,
+              vertical_margin: int = 1) -> str:
         s = r = (" " + self._hb * self._husl) * self._width + _linesep
-        hsp, vsp = int(0.5 * self._husl - 0.5), int(0.5 * self._vusl - 0.5)
         for line in self._p_map:
-            b = ((self._vb + " " * self._husl) * self._width + self._vb + _linesep) * vsp
+            b = ((self._vb + " " * self._husl) * self._width + self._vb + _linesep) * vertical_margin
             s += b
+            sp = ""
             for p_index in line:
-                s += self._vb + " " * hsp + (
+                sp += self._vb + " " * horizontal_margin + (
                     self.get_piece_symbol
                     if symbolization is None
                     else symbolization
-                )(p_index) + " " * hsp
-            s += self._vb + _linesep + b + r
+                )(p_index) * (self._husl - 2 * horizontal_margin) + " " * horizontal_margin
+            sp += self._vb + _linesep
+            s += sp * (self._vusl - 2 * vertical_margin) + b + r
         return s
 
     def __setitem__(self, key: tuple[int, int], value: int):
@@ -106,4 +114,4 @@ class Board(object):
         return self._p_map[y][x]
 
     def __str__(self) -> str:
-        return self._show()
+        return self._show(horizontal_margin=self._hm, vertical_margin=self._vm)
