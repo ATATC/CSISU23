@@ -1,8 +1,7 @@
-from typing import Sequence
 from abc import abstractmethod
 from copy import copy as _copy
-from src.framework.board import Board as _Board
 from random import choice as _choice
+from tictactoe.framework.board import Board as _Board
 
 
 class Player(object):
@@ -31,10 +30,10 @@ class Player(object):
 
 
 class ProgramedPlayer(Player):
-    def __init__(self, player: Player, decisions: Sequence[tuple[int, int]]):
+    def __init__(self, player: Player, decisions: [[int, int]]):
         super(ProgramedPlayer, self).__init__(player.name, player._p_index)
         self._player: Player = player
-        self._decisions: Sequence[Sequence[int, int]] = decisions
+        self._decisions: [[int, int]] = decisions
         self._i: int = -1
 
     def decide(self, board: _Board) -> [int, int]:

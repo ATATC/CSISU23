@@ -1,11 +1,11 @@
-from threading import Lock
 from typing import Sequence, Any
+from threading import Lock as _Lock
 
 
 class AtomicInteger(object):
     def __init__(self, n: int):
         self._n: int = n
-        self._lock: Lock = Lock()
+        self._lock: _Lock = _Lock()
 
     def get(self) -> int:
         return self._n

@@ -1,6 +1,6 @@
 from random import choice
 from typing import Optional, Sequence, Callable
-from framework import RuleSet, Player, Tied, GameOver, Board, ProgramedPlayer, classic_index
+from tictactoe.framework import RuleSet, Player, Tied, GameOver, Board, ProgramedPlayer, classic_index
 
 
 class TicTacToeRS(RuleSet):
@@ -43,7 +43,7 @@ class TicTacToeBoard(Board):
 
 class HumanPlayer(Player):
     def decide(self, board: TicTacToeBoard) -> [int, int]:
-        return board.convert_index(int(input(f"{self.name}, your turn: >>>")) - 1)
+        return board.revert_index(int(input(f"{self.name}, your turn: >>>")) - 1)
 
 
 def valid_or_none(i: int) -> Optional[int]:
@@ -117,7 +117,7 @@ def lines2rd(lines: Sequence[str]) -> Sequence[tuple[int, int]]:
     return r
 
 
-def choose_player(serial: str, p_index: int) -> [Player, Optional[str]]:
+def choose_player(serial: str, p_index: int, ai_bot: bool = False) -> [Player, Optional[str]]:
     player = rd_dir = None
     serial = serial.upper()
     default_rd_dir = f"./recorded_decisions/{serial.lower()}.rd"
@@ -127,7 +127,11 @@ def choose_player(serial: str, p_index: int) -> [Player, Optional[str]]:
             name = input("Your name >>>")
             player = HumanPlayer(f"Player {serial}" if name == "" else name, p_index)
         elif option == "B":
-            player = Bot(f"Bot {serial}", p_index)
+            if ai_bot:
+                from tictactoe.real_ai import load_from
+                player = load_from("./model/23m05.pth", f"AI {serial}", p_index)
+            else:
+                player = Bot(f"Bot {serial}", p_index)
         else:
             print("Unknown option. Try again.")
     if input(f"Load previously recorded decisions? (Y) Yes (n) No >>>") == "Y":

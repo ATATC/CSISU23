@@ -2,8 +2,8 @@ from abc import abstractmethod
 from copy import copy as _copy
 # from os import linesep as _linesep
 from typing import Optional, Callable
-from .utils import AtomicInteger as _AtomicInteger
-from .rule import RuleSet as _RuleSet, InvalidStep as _InvalidStep
+from tictactoe.framework.utils import AtomicInteger as _AtomicInteger
+from tictactoe.framework.rule import RuleSet as _RuleSet, InvalidStep as _InvalidStep
 
 
 _linesep = "\n"
@@ -45,13 +45,21 @@ class Board(object):
     def clear(self):
         self._p_map = Board.new_p_map(self._width, self._height)
 
-    def convert_index(self, index: int) -> [int, int]:
+    def revert_index(self, index: int) -> [int, int]:
         """
         Convert 1-D index to 2-D index.
         :param index: 1-D index
         :return: 2-D index
         """
         return index % self._width, index // self._width
+
+    def convert_index(self, index: [int, int]) -> int:
+        """
+        Convert 2-D index to 1-D index.
+        :param index: 2-D index
+        :return: 1-D index
+        """
+        return index[1] * self._width + index[0]
 
     def get_width(self) -> int:
         return self._width
@@ -109,7 +117,7 @@ class Board(object):
         for row in self._p_map:
             for p in row:
                 if p == -1:
-                    r.append(self.convert_index(i))
+                    r.append(self.revert_index(i))
                 i += 1
         return r
 
@@ -156,10 +164,10 @@ class Board(object):
             s += sp * (self._vusl - 2 * vertical_margin) + b + r
         return s
 
-    def __setitem__(self, key: tuple[int, int], value: int):
+    def __setitem__(self, key: [int, int], value: int):
         self.go(*key, value, True)
 
-    def __getitem__(self, key: tuple[int, int]) -> int:
+    def __getitem__(self, key: [int, int]) -> int:
         x, y = key
         return self._p_map[y][x]
 

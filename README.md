@@ -6,28 +6,25 @@ ICS3U Assignment at Villanova College
 ### Run
 
 ```shell
-python3 src/main.py
+python3 tictactoe/main.py
 ```
 
 ### Enable Real AI
 
-You will have to install [PyTorch](https://pytorch.org) and edit `src/tictactoe.py`.
+You will have to install [PyTorch](https://pytorch.org) and edit `main.py`.
 
-Add this line to the top:
-
-```python
-from real_ai import load_from
-```
-
-Then locate the following line in the function `choose_player()`:
+Locate the following lines:
 
 ```python
-player = Bot(f"Bot {serial}", p_index)
+player_a, rd_dir_a = choose_player("A", 0)
+player_b, rd_dir_b = choose_player("B", 1)
 ```
 
-Change the line above to the following:
+Change the lines above to the following:
 
 ```python
-player = load_from("./m/20230504B0.pth", name=f"AI {serial}", p_index=p_index)
+player_a, rd_dir_a = choose_player("A", 0, ai_bot=True)
+player_b, rd_dir_b = choose_player("B", 1, ai_bot=True)
 ```
 
+Notice that the model file must exist as `.model/23m05.pth`. Make sure you set the working directory to the root of the project.
