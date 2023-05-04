@@ -2,7 +2,7 @@ from torch import load as _load
 from random import choice as _choice
 from tictactoe.framework import InvalidStep as _InvalidStep
 from tictactoe.real_ai.module import Network as _Network
-from tictactoe.real_ai.boards import get_current, get_merged
+from tictactoe.real_ai.boards import get_current, get_merged, get_default
 from tictactoe import Player as _Player, Surrender as _Surrender, Board as _Board
 
 
@@ -19,7 +19,8 @@ class AI(_Player):
 
     def decide(self, board: _Board) -> [int, int]:
         if self._a is None or self._b is None:
-            self._a = self._b = get_current(board)
+            self._a = get_current(board)
+            self._b = get_default(board)
         output = self.network(get_merged(board, a=self._a, b=self._b))
         d = output.max(1, keepdim=True)[1].item() - 1
         print(f"AI output: {d}.")

@@ -4,6 +4,10 @@ from tictactoe import TicTacToeBoard as _TicTacToeBoard, TicTacToeRS as _TicTacT
     Surrender as _Surrender, GameOver as _GameOver, Board as _Board
 
 
+def get_default(*boards: _Board) -> _Tensor:
+    return _Tensor([_Board.new_p_map(3, 3) for _ in range(len(boards))]).view(-1, 3, 3, 1)
+
+
 def get_current(*boards: _Board) -> _Tensor:
     return _Tensor([b.get_piece_map() for b in boards]).view(-1, 3, 3, 1)
 
