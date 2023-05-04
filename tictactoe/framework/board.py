@@ -42,9 +42,6 @@ class Board(object):
     def new_p_map(width: int, height: int) -> list[list[int]]:
         return [([-1] * width) for _ in range(height)]
 
-    def clear(self):
-        self._p_map = Board.new_p_map(self._width, self._height)
-
     def revert_index(self, index: int) -> [int, int]:
         """
         Convert 1-D index to 2-D index.

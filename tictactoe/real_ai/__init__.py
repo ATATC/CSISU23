@@ -21,11 +21,11 @@ class AI(_Player):
         if self._a is None or self._b is None:
             self._a = self._b = get_current(board)
         output = self.network(get_merged(board, a=self._a, b=self._b))
-        d = output.max(1, keepdim=True)[1] - 1
+        d = output.max(1, keepdim=True)[1].item() - 1
+        print(f"AI output: {d}.")
         if d == -1:
             raise _Surrender(self._p_index)
         index = board.revert_index(d)
-        print(f"AI output: {index}.")
         try:
             board.check_index(*index)
         except _InvalidStep:
