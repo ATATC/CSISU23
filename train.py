@@ -5,8 +5,8 @@ from tictactoe.real_ai.boards import *
 from tictactoe.real_ai.module import *
 
 
-NUM_BATCHES = 80000
-ZERO_LIMIT = .05 * NUM_BATCHES
+NUM_BATCHES = 320000
+ZERO_LIMIT = .075 * NUM_BATCHES
 
 # these control over-fitting
 # (16, 8) (32, 7)
