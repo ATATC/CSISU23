@@ -21,11 +21,11 @@ class AI(_Player):
         if d == -1:
             raise _Surrender(self._p_index)
         index = board.revert_index(d)
-        print(f"AI's decision: {index}.")
+        print(f"AI output: {index}.")
         try:
             board.check_index(*index)
         except _InvalidStep:
-            print(UserWarning("WARNING: AI performed unexpectedly."))
+            print(UserWarning("WARNING: AI performed unexpectedly. Randomization intervened."))
             return _choice(board.blanks())
         return index
 
