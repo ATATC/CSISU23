@@ -5,13 +5,13 @@ from tictactoe.real_ai.boards import *
 from tictactoe.real_ai.module import *
 
 
-NUM_BATCHES = 320000
-ZERO_LIMIT = .075 * NUM_BATCHES
+NUM_BATCHES = 80000
 
 # these control over-fitting
 # (16, 8) (32, 7)
-BATCH_SIZE = 16
-ROUND_LIMIT = 8
+ZERO_LIMIT = .75 * NUM_BATCHES
+BATCH_SIZE = 32
+ROUND_LIMIT = 6
 
 if __name__ == '__main__':
     counter = 0

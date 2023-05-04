@@ -1,4 +1,4 @@
-from torch import nn
+from torch import nn, tanh
 
 
 class Network(nn.Module):
@@ -15,5 +15,5 @@ class Network(nn.Module):
         x = nn.functional.relu(self.conv2(x))
         x = x.view(-1, 512)
         x = self.fc1(x)
-        x = nn.functional.tanh(x)
+        x = tanh(x)
         return self.fc2(x)
