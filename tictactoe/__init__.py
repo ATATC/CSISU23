@@ -43,7 +43,10 @@ class TicTacToeBoard(Board):
 
 class HumanPlayer(Player):
     def decide(self, board: TicTacToeBoard) -> [int, int]:
-        return board.revert_index(int(input(f"{self.name}, your turn: >>>")) - 1)
+        d = ""
+        while not d.isnumeric():
+            d = input(f"{self.name}, your turn: >>>")
+        return board.revert_index(int(d) - 1)
 
 
 def valid_or_none(i: int) -> Optional[int]:
@@ -92,7 +95,7 @@ class Bot(Player):
             if r is not None:
                 return r
         corners = (board[(0, 0)], board[(2, 0)], board[(2, 2)], board[(0, 2)])
-        if corners.count(self._p_index) == 3:
+        if corners.count(self._p_index) == 3 and board[(1, 1)] == -1:
             return 1, 1
         i = classic_index(corners, -1)
         if i == 0:
@@ -133,7 +136,7 @@ def choose_player(serial: str, p_index: int, ai_bot: bool = False) -> [Player, O
         elif option == "B":
             if ai_bot:
                 from tictactoe.real_ai import load_from
-                player = load_from("./model/23m05.pth", f"AI {serial}", p_index)
+                player = load_from("./model/23mxx.pth", f"AI {serial}", p_index)
             else:
                 player = Bot(f"Bot {serial}", p_index)
         else:

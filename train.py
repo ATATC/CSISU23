@@ -9,9 +9,9 @@ NUM_BATCHES = 80000
 
 # these control over-fitting
 # (16, 8) (32, 7)
-ZERO_LIMIT = .75 * NUM_BATCHES
-BATCH_SIZE = 32
-ROUND_LIMIT = 6
+ZERO_LIMIT = .1 * NUM_BATCHES
+BATCH_SIZE = 95
+ROUND_LIMIT = 7
 
 if __name__ == '__main__':
     counter = 0
@@ -27,11 +27,13 @@ if __name__ == '__main__':
         suggestions = boards.get_suggestions()
         loss = loss_function(output, suggestions)
         if loss == 0:
-            if counter > ZERO_LIMIT:
+            if counter >= ZERO_LIMIT:
+                print("Reached limit.")
                 epoch -= 1
                 continue
             counter += 1
         print(loss.item())
+        loss += .001
         boards.go(suggestions)
         loss.backward()
         optimizer.step()
