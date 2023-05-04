@@ -61,6 +61,6 @@ Notice that the model file must exist as `.model/23m05.pth`. Make sure you set t
 
 #### Limitations
 
-The structure is very similar to LeNet-5. It takes in a 4-D tensor with the size of (batch_size, 3, 3, 3). The other 2 channels are the previous piece map and the second previous piece map multiply weights of 0.5 and 0.25 respectively. The network outputs a distribution of probabilities indicating the scores of the 9 plaids.
+The structure is very similar to LeNet-5. It takes in a 4-D tensor with the size of (batch_size, 3, 3, 3). The other 2 channels are the previous piece map and the second previous piece map. The network outputs a distribution of probabilities indicating the scores of the 9 plaids.
 
 Instead of training with Reinforcement Learning, it is somehow distilled from `tictactoe.Bot`. Due to the sketchy design, it does not show a state-of-art performance.

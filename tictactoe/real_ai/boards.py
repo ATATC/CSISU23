@@ -10,8 +10,8 @@ def get_current(*boards: _Board) -> _Tensor:
 
 def get_merged(*boards: _Board, a: _Tensor, b: _Tensor) -> _Tensor:
     x = get_current(*boards)
-    x = _cat((x, a * .5), dim=3)
-    x = _cat((x, b * .25), dim=3)
+    x = _cat((x, a), dim=3)
+    x = _cat((x, b), dim=3)
     return x
 
 

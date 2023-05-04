@@ -3,13 +3,13 @@ from torch.optim import Adam
 from torch.nn import CrossEntropyLoss
 from tictactoe.real_ai.boards import *
 from tictactoe.real_ai.module import *
-from tictactoe.framework import RandomPlayer
 
 
-# Maximum 362880
-NUM_BATCHES = 100000
-BATCH_SIZE = 32
-ROUND_LIMIT = 5
+NUM_BATCHES = 80000
+BATCH_SIZE = 8
+
+# this controls over-fitting
+ROUND_LIMIT = 8
 
 
 if __name__ == '__main__':
