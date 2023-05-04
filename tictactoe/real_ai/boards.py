@@ -36,7 +36,6 @@ class Boards(object):
                 self._opponent.go(b)
             except _GameOver:
                 pass
-        self.step()
 
     def go(self, y: _Tensor):
         for i in range(self._batch_size):

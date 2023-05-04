@@ -10,6 +10,7 @@ class Network(nn.Module):
         self.fc2 = nn.Linear(128, 10)
 
     def forward(self, x):
+        x = x.add(1)
         x = nn.functional.relu(self.conv1(x))
         x = nn.functional.relu(self.conv2(x))
         x = x.view(-1, 512)
