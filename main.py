@@ -25,6 +25,10 @@ if __name__ == '__main__':
             while True:
                 try:
                     (player_a if board.get_round_counter() % 2 == 0 else player_b).go(board)
+                    # if type(player_a) != HumanPlayer:
+                    #     player_a.step()
+                    # if type(player_b) != HumanPlayer:
+                    #     player_b.step()
                     print(board)
                     sleep(.8)
                 except InvalidStep:

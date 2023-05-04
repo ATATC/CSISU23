@@ -1,14 +1,14 @@
 from torch import cat as _cat, Tensor as _Tensor
 from tictactoe.framework import RandomPlayer as _RandomPlayer
 from tictactoe import TicTacToeBoard as _TicTacToeBoard, TicTacToeRS as _TicTacToeRS, Bot as _Bot, \
-    Surrender as _Surrender, GameOver as _GameOver
+    Surrender as _Surrender, GameOver as _GameOver, Board as _Board
 
 
-def get_current(*boards: _TicTacToeBoard) -> _Tensor:
+def get_current(*boards: _Board) -> _Tensor:
     return _Tensor([b.get_piece_map() for b in boards]).view(-1, 3, 3, 1)
 
 
-def get_merged(*boards: _TicTacToeBoard, a: _Tensor, b: _Tensor) -> _Tensor:
+def get_merged(*boards: _Board, a: _Tensor, b: _Tensor) -> _Tensor:
     x = get_current(*boards)
     x = _cat((x, a * .5), dim=3)
     x = _cat((x, b * .25), dim=3)
@@ -36,6 +36,7 @@ class Boards(object):
                 self._opponent.go(b)
             except _GameOver:
                 pass
+        self.step()
 
     def go(self, y: _Tensor):
         for i in range(self._batch_size):

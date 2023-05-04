@@ -16,19 +16,46 @@ python3 main.py
 
 You will have to install [PyTorch](https://pytorch.org) and edit `main.py`.
 
-Locate the following lines:
+1. Locate the following lines
 
-```python
-player_a, rd_dir_a = choose_player("A", 0)
-player_b, rd_dir_b = choose_player("B", 1)
-```
+   ```python
+   player_a, rd_dir_a = choose_player("A", 0)
+   player_b, rd_dir_b = choose_player("B", 1)
+   ```
 
-Change the lines above to the following:
+2. Change the lines above to the following
 
-```python
-player_a, rd_dir_a = choose_player("A", 0, ai_bot=True)
-player_b, rd_dir_b = choose_player("B", 1, ai_bot=True)
-```
+   ```python
+   player_a, rd_dir_a = choose_player("A", 0, ai_bot=True)
+   player_b, rd_dir_b = choose_player("B", 1, ai_bot=True)
+   ```
+
+3. Locate the following lines
+
+   ```python
+   (player_a if board.get_round_counter() % 2 == 0 else player_b).go(board)
+   print(board)
+   ```
+
+4. Insert the following code after the first line
+
+   ```python
+   if type(player_a) != HumanPlayer:
+       player_a.step()
+   if type(player_b) != HumanPlayer:
+       player_b.step()
+   ```
+
+   It should look like this finally:
+
+   ```python
+   (player_a if board.get_round_counter() % 2 == 0 else player_b).go(board)
+   if type(player_a) != HumanPlayer:
+       player_a.step()
+   if type(player_b) != HumanPlayer:
+       player_b.step()
+   print(board)
+   ```
 
 Notice that the model file must exist as `.model/23m05.pth`. Make sure you set the working directory to the root of the
 project.
