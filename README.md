@@ -15,6 +15,8 @@ ICS3U Assignment at Villanova College
 
 ### Run
 
+Make sure you set the working directory to the root of the project.
+
 ```shell
 python3 main.py
 ```
@@ -66,7 +68,8 @@ You will have to install [PyTorch](https://pytorch.org) and edit `main.py`.
    print(board)
    ```
 
-Notice that the model file must exist as `.model/23mxx.pth`. Make sure you set the working directory to the root of the project.
+Notice that the model file must exist as `.model/23mxx.pth`. You will find trained models under the folder `model`. I found `23m04` works the best.
+Rename the model you pick to `23mxx.pth` so that the program can successfully find it.
 
 #### Limitations
 
