@@ -66,7 +66,7 @@ You will have to install [PyTorch](https://pytorch.org) and edit `main.py`.
    print(board)
    ```
 
-Notice that the model file must exist as `.model/23m05.pth`. Make sure you set the working directory to the root of the project.
+Notice that the model file must exist as `.model/23mxx.pth`. Make sure you set the working directory to the root of the project.
 
 #### Limitations
 
