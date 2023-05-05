@@ -38,10 +38,15 @@ if __name__ == '__main__':
             print(f"Tied.")
         except GameOver as e:
             print(board)
-            print(f"{player_a if e.winner == 0 else player_b} won!")
+            player = player_a if e.winner == 0 else player_b
+            player.score += 1
+            print(f"{player} won!")
         except Surrender as e:
             print(board)
-            print(f"{player_a if e.loser == 0 else player_b} surrendered!")
+            player = player_a if e.loser == 0 else player_b
+            player.score -= 1
+            print(f"{player} surrendered!")
+        print(f"{player_a.score} ({player_a}) : {player_b.score} ({player_b})")
         if rd_dir_a is not None:
             with open(rd_dir_a, "w") as f:
                 f.write(linesep.join(rd2lines(player_a.get_recorded_decisions())))

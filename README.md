@@ -6,6 +6,7 @@ ICS3U Assignment at Villanova College
 
 - A universal board framework with high extensibility
 - Scalable rendering
+- Score counter
 - Input error detection
 - A robust bot
 - Optional real AI (not if-else)

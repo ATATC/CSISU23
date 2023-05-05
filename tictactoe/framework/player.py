@@ -11,6 +11,7 @@ class Player(object):
         self._p_index: int = p_index
         self._record_mode: bool = False
         self._recorded_decisions: list[tuple[int, int]] = []
+        self.score: int = 0
 
     def record(self):
         self._record_mode = True
