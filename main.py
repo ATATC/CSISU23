@@ -13,12 +13,12 @@ if __name__ == '__main__':
         scale = int(scale)
     else:
         scale = 1
+    player_a, rd_dir_a = choose_player("A", 0)
+    player_b, rd_dir_b = choose_player("B", 1)
+    # player_a, rd_dir_a = choose_player("A", 0, True)
+    # player_b, rd_dir_b = choose_player("B", 1, True)
     while True:
         board = TicTacToeBoard(TicTacToeRS(), horizontal_unit_sl=6 * scale + 3, vertical_unit_sl=2 * scale + 1)
-        player_a, rd_dir_a = choose_player("A", 0)
-        player_b, rd_dir_b = choose_player("B", 1)
-        # player_a, rd_dir_a = choose_player("A", 0, True)
-        # player_b, rd_dir_b = choose_player("B", 1, True)
         print("Indexes are shown as below:")
         print(board.show_indexes())
         try:

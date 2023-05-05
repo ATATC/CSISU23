@@ -18,8 +18,8 @@ class TicTacToeRS(RuleSet):
                                  or self.board.diagonal(2, False).count(p_index)
                                  == min(self.board.get_width(), self.board.get_height())):
             raise GameOver(p_index)
-        if self.board.row(y) == [p_index] * self.board.get_width() \
-                or self.board.column(x) == [p_index] * self.board.get_height():
+        if self.board.row(y).count(p_index) == self.board.get_width() \
+                or self.board.column(x).count(p_index) == self.board.get_height():
             raise GameOver(p_index)
 
 
