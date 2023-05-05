@@ -27,12 +27,20 @@ class Tied(GameOver):
 
 
 class RuleSet(object):
-    def on_piece_down(self,
-                      x: int,
-                      y: int,
-                      p_index: int): pass
+    def on_piece_down(self, x: int, y: int, p_index: int):
+        """
+        Before the piece is applied.
+        :param x: x-coordinate
+        :param y: y-coordinate
+        :param p_index: piece index
+        """
+        pass
 
-    def post_piece_down(self,
-                        x: int,
-                        y: int,
-                        p_index: int): pass
+    def post_piece_down(self, x: int, y: int, p_index: int):
+        """
+        After the piece is applied.
+        :param x: x-coordinate
+        :param y: y-coordinate
+        :param p_index: piece index
+        """
+        pass

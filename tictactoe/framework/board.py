@@ -21,6 +21,19 @@ class Board(object):
                  vertical_unit_sl: int = 3,
                  horizontal_margin: int = 4,
                  vertical_margin: int = 1):
+        """
+        Create a board.
+        :param width: width in plaids
+        :param height: height in plaids
+        :param rule_set: the rule set
+        :param p_classes: the number of classes of pieces
+        :param horizontal_border: a punctuation of horizontal border
+        :param vertical_border: a punctuation of vertical border
+        :param horizontal_unit_sl: horizontal unit side length
+        :param vertical_unit_sl: vertical unit side length
+        :param horizontal_margin: horizontal margin one on each side
+        :param vertical_margin: vertical margin one at the top and one at the bottom
+        """
         self._width: int = width
         self._height: int = height
         self._rs: _RuleSet = rule_set
@@ -75,7 +88,7 @@ class Board(object):
         """
         Convert the piece index into a character.
         :param p_index: the piece index
-        :return: the character, a string with the length of 1
+        :return: the character, a string with a length of 1
         """
         pass
 

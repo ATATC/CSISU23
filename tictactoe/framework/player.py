@@ -17,12 +17,22 @@ class Player(object):
         self._record_mode = True
 
     @abstractmethod
-    def decide(self, board: _Board) -> [int, int]: pass
+    def decide(self, board: _Board) -> [int, int]:
+        """
+        Decide where to go.
+        :param board: the board
+        :return: a 2-D index
+        """
+        pass
 
     def go(self, board: _Board):
-        decision = self.decide(_copy(board))
-        board.go(*decision, self._p_index, False)
-        self._recorded_decisions.append(decision)
+        """
+        Let the player go. Note that this function modifies :param board.
+        :param board: the board
+        """
+        d = self.decide(_copy(board))
+        board.go(*d, self._p_index, False)
+        self._recorded_decisions.append(d)
 
     def get_recorded_decisions(self) -> list[tuple[int, int]]:
         return self._recorded_decisions

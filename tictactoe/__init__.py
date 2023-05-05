@@ -7,10 +7,7 @@ class TicTacToeRS(RuleSet):
     def __init__(self):
         self.board: Optional[TicTacToeBoard] = None
 
-    def post_piece_down(self,
-                        x: int,
-                        y: int,
-                        p_index: int):
+    def post_piece_down(self, x: int, y: int, p_index: int):
         if self.board.get_round_counter() == self.board.get_width() * self.board.get_height():
             raise Tied()
         if (x + y) % 2 == 0 and (self.board.diagonal(0, True).count(p_index)
@@ -63,11 +60,11 @@ def defend(line: Sequence[int], pi: int, opi: int) -> Optional[int]:
 
 
 def for_each_line(board: TicTacToeBoard, pi: int, opi: int, action: Callable) -> Optional[tuple[int, int]]:
-    for i in range(3):
+    for i in range(board.get_height()):
         x = action(board.row(i), pi, opi)
         if x is not None:
             return x, i
-    for i in range(3):
+    for i in range(board.get_width()):
         y = action(board.column(i), pi, opi)
         if y is not None:
             return i, y
@@ -83,7 +80,6 @@ class Bot(Player):
     """
     Works only when the board is 3x3.
     """
-
     def decide(self, board: TicTacToeBoard) -> [int, int]:
         if board.get_round_counter() >= 9:
             raise Surrender(self._p_index)
@@ -125,6 +121,13 @@ def lines2rd(lines: Sequence[str]) -> Sequence[tuple[int, int]]:
 
 
 def choose_player(serial: str, p_index: int, ai_bot: bool = False) -> [Player, Optional[str]]:
+    """
+    Let the user choose a player.
+    :param serial: serial of the player, such as "A" or "B"
+    :param p_index: the index of the piece that the player uses
+    :param ai_bot: enable AI bot
+    :return: the player object, the location to save recorded decisions
+    """
     player = rd_dir = None
     serial = serial.upper()
     default_rd_dir = f"./recorded_decisions/{serial.lower()}.rd"
