@@ -8,8 +8,7 @@ class Tester(RandomPlayer):
     def clear(self): pass
 
 
-PA = Tester("Tester", 0)
-PB = load_from("./model/23mxx.pth", "AI", 1)
+PA, PB = load_from("./model/23mxx.pth", "AI", 0), Tester("Tester", 1)
 
 NUM_GAMES = 10000
 
