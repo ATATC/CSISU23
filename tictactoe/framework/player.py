@@ -2,7 +2,7 @@ from abc import abstractmethod
 from copy import copy as _copy
 from random import choice as _choice
 from tictactoe.framework import Board as _Board
-from tictactoe.framework.rule import GameOver as _GameOver
+from tictactoe.framework.rule import Surrender as _Surrender
 
 
 class Player(object):
@@ -60,5 +60,5 @@ class RandomPlayer(Player):
     def decide(self, board: _Board) -> [int, int]:
         choices = board.blanks()
         if len(choices) < 1:
-            raise _GameOver(None)
+            raise _Surrender(self._p_index)
         return _choice(choices)

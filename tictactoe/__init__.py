@@ -33,8 +33,8 @@ class TicTacToeBoard(Board):
     def get_piece_symbol(self, p_index: int) -> str:
         return {
             -1: " ",
-            0: "O",
-            1: "X",
+            0: "X",
+            1: "O",
         }[p_index]
 
 

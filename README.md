@@ -83,8 +83,19 @@ You will have to install [PyTorch](https://pytorch.org) and edit `main.py`.
    print(board)
    ```
 
+5. Append the following code to the end of the file
+
+   ```python
+   if type(player_a) != HumanPlayer:
+       player_a.clear()
+   if type(player_b) != HumanPlayer:
+       player_b.clear()
+   ```
+
+   Make sure it is under the `while True` loop.
+
 Notice that the model file must exist as `.model/23mxx.pth`. You will find trained models under the folder `model`. I found `23m04` works the best.
-Rename the model you pick to `23mxx.pth` so that the program can successfully find it.
+Rename the model you pick to `23mxx.pth` so that the program can find it successfully.
 
 #### About Real AI
 

@@ -40,6 +40,8 @@ class Boards(object):
                 self._opponent.go(b)
             except _GameOver:
                 pass
+            except _Surrender:
+                pass
         self.step()
 
     def go(self, y: _Tensor):
