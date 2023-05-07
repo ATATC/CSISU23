@@ -1,6 +1,6 @@
 # CSISU23
 
-ICS3U Assignment at Villanova College
+ICS3U Independant Study Unit at Villanova College - Tic-Tac-Toe
 
 ## Features
 
