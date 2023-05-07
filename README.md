@@ -94,9 +94,8 @@ You will have to install [PyTorch](https://pytorch.org) and edit `main.py`.
 
    Make sure it is under the `while True` loop.
 
-Notice that the model file must exist as `.model/23mxx.pth`. You will find trained models under the folder `model`. I found `23m04` works the best.
+Notice that the model file must exist as `.model/23mxx.pth`. You will find trained models under the folder `model`.
 Rename the model you pick to `23mxx.pth` so that the program can find it successfully.
 
-#### About Real AI
+For more information see *Extension - Real AI.md*.
 
-See *Extension - Real AI.md*.

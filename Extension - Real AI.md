@@ -1,8 +1,8 @@
 # Extension - Real AI
 
-## Goal
+## Abstract
 
-The goal of this extension is to train a real deep-learning-based bot player.
+In this assignment, I proposed a convolutional neural network that has the ability to play Tic-Tac-Toe. It takes a 4-D tensor as input and outputs a distribution of probabilities. Harmful data nullification and transfer learning are used in training. Overall, the model exhibits moderate performance.
 
 ## Design
 
@@ -352,7 +352,9 @@ Since this method is only enabled when the model plays as the first player, comp
 
 From the table, it is clear that this method does improve the model's ability, albeit by a small margin.
 
-## Limitations
+## Conclusion and Limitations
+
+In conclusion, the model is able to play the game, yet not as robust as `tictactoe.Bot` is. However, it can be an advantage that the model actually shows more human characteristics.
 
 Instead of training with reinforcement learning, it is somehow distilled from `tictactoe.Bot`. Due to the sketchy design, it does not show a state-of-art performance.
 
