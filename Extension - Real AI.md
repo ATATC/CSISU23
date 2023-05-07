@@ -52,15 +52,19 @@ $$
 | 23m17 | 40000       | 16         | 4           | 0          |
 | 23m18 | 8000        | 16         | 6           | 0          |
 
-#### Evaluation
+## Testing
 
-Each model is tested for 10k games. As there are random factors, the result might be slightly different every time.
+### Evaluation
+
+A variety of versions are trained with different hyperparameters. When testing the performance, they commonly show weakness in making appropriate decisions. Some of them even output invalid indexes or surrender prematurely.
+
+Each model is tested for 10k games against a `tictactoe.framework.RandomPlayer`. As there are random factors, the result might be slightly different every time.
 
 **WP** shows two probabilities which are the chance that the model wins and the chance the opponent wins respectively.
 
 **CD** shows the distribution of different conditions as `{someone won} / {tied} / {someone surrendered}`.
 
-##### Playing as The First Player
+#### Playing as The First Player
 
 | Model | WP            | CD                |
 | ----- | ------------- | ----------------- |
@@ -83,7 +87,7 @@ Each model is tested for 10k games. As there are random factors, the result migh
 | 23m17 | 49.52% 25.56% | 7508 / 2492 / 0   |
 | 23m18 | 41.41% 26.05% | 6738 / 3254 / 8   |
 
-##### Playing as The Second Player
+#### Playing as The Second Player
 
 | Model | WP            | CD               |
 | ----- | ------------- | ---------------- |
@@ -105,10 +109,6 @@ Each model is tested for 10k games. As there are random factors, the result migh
 | 23m16 | 50.85% 25.10% | 7595 / 2405 / 0  |
 | 23m17 | 49.97% 27.77% | 7774 / 2226 / 0  |
 | 23m18 | 59.42% 23.63% | 8283 / 1695 / 22 |
-
-## Testing
-
-A variety of versions are trained with different hyperparameters. When testing the performance, they commonly show weakness in making appropriate decisions. Some of them even output invalid indexes or surrender prematurely.
 
 ### Showcase
 
@@ -134,11 +134,210 @@ The model sees the board differently in the following way:
 
 ##### Case A
 
+Model: `23m14`
 
+```shell
+AI output: 8.
+ --------- --------- ---------
+|         |         |         |
+|         |         |         |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|         |         |         |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|         |         |    X    |
+|         |         |         |
+ --------- --------- ---------
+```
+
+```shell
+AI output: 4.
+ --------- --------- ---------
+|         |         |         |
+|    O    |         |         |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|         |    X    |         |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|         |         |    X    |
+|         |         |         |
+ --------- --------- ---------
+```
+
+```shell
+AI output: 5.
+ --------- --------- ---------
+|         |         |         |
+|    O    |         |    O    |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|         |    X    |    X    |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|         |         |    X    |
+|         |         |         |
+ --------- --------- ---------
+```
+
+```shell
+AI output: 1.
+ --------- --------- ---------
+|         |         |         |
+|    O    |    X    |    O    |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|         |    X    |    X    |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|         |    O    |    X    |
+|         |         |         |
+ --------- --------- ---------
+```
+
+Even though this is the best model for being the first player, the intention to defend is still so strong that it hardly has the ability to attack.
+
+##### Case B
+
+Model: `23m09`
+
+```shell
+AI output: 4.
+ --------- --------- ---------
+|         |         |         |
+|         |         |         |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|         |    X    |         |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|         |         |         |
+|         |         |         |
+ --------- --------- ---------
+```
+
+```shell
+AI output: 2.
+ --------- --------- ---------
+|         |         |         |
+|    O    |         |    X    |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|         |    X    |         |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|         |         |         |
+|         |         |         |
+ --------- --------- ---------
+```
+
+```shell
+AI output: 6.
+ --------- --------- ---------
+|         |         |         |
+|    O    |    O    |    X    |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|         |    X    |         |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|    X    |         |         |
+|         |         |         |
+ --------- --------- ---------
+```
+
+Quite strange that the lower-ranking model actually plays better than the one above.
 
 #### Playing as The Second
 
 ##### Case A
+
+Model: `23m08`
+
+```shell
+AI output: 0.
+ --------- --------- ---------
+|         |         |         |
+|    O    |         |         |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|    X    |         |         |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|         |         |         |
+|         |         |         |
+ --------- --------- ---------
+```
+
+```shell
+AI output: 2.
+ --------- --------- ---------
+|         |         |         |
+|    O    |    X    |    O    |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|    X    |         |         |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|         |         |         |
+|         |         |         |
+ --------- --------- ---------
+```
+
+```shell
+AI output: 4.
+ --------- --------- ---------
+|         |         |         |
+|    O    |    X    |    O    |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|    X    |    O    |    X    |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|         |         |         |
+|         |         |         |
+ --------- --------- ---------
+```
+
+```shell
+AI output: 8.
+ --------- --------- ---------
+|         |         |         |
+|    O    |    X    |    O    |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|    X    |    O    |    X    |
+|         |         |         |
+ --------- --------- ---------
+|         |         |         |
+|    X    |         |    O    |
+|         |         |         |
+ --------- --------- ---------
+
+AI B won!
+```
 
 ## Ablation Experiment
 
