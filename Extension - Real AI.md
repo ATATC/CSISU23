@@ -259,6 +259,8 @@ AI output: 6.
 |    X    |         |         |
 |         |         |         |
  --------- --------- ---------
+
+AI A won!
 ```
 
 Quite strange that the lower-ranking model actually plays better than the one above.
