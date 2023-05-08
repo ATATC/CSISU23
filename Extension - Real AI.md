@@ -136,7 +136,7 @@ The model sees the board differently in the following way:
 
 Model: `23m14`
 
-```shell
+```
 AI output: 8.
  --------- --------- ---------
 |         |         |         |
@@ -153,7 +153,7 @@ AI output: 8.
  --------- --------- ---------
 ```
 
-```shell
+```
 AI output: 4.
  --------- --------- ---------
 |         |         |         |
@@ -170,7 +170,7 @@ AI output: 4.
  --------- --------- ---------
 ```
 
-```shell
+```
 AI output: 5.
  --------- --------- ---------
 |         |         |         |
@@ -187,7 +187,7 @@ AI output: 5.
  --------- --------- ---------
 ```
 
-```shell
+```
 AI output: 1.
  --------- --------- ---------
 |         |         |         |
@@ -210,7 +210,7 @@ Even though this is the best model for being the first player, the intention to 
 
 Model: `23m09`
 
-```shell
+```
 AI output: 4.
  --------- --------- ---------
 |         |         |         |
@@ -227,7 +227,7 @@ AI output: 4.
  --------- --------- ---------
 ```
 
-```shell
+```
 AI output: 2.
  --------- --------- ---------
 |         |         |         |
@@ -244,7 +244,7 @@ AI output: 2.
  --------- --------- ---------
 ```
 
-```shell
+```
 AI output: 6.
  --------- --------- ---------
 |         |         |         |
@@ -269,7 +269,7 @@ Quite strange that the lower-ranking model actually plays better than the one ab
 
 Model: `23m08`
 
-```shell
+```
 AI output: 0.
  --------- --------- ---------
 |         |         |         |
@@ -286,7 +286,7 @@ AI output: 0.
  --------- --------- ---------
 ```
 
-```shell
+```
 AI output: 2.
  --------- --------- ---------
 |         |         |         |
@@ -303,7 +303,7 @@ AI output: 2.
  --------- --------- ---------
 ```
 
-```shell
+```
 AI output: 4.
  --------- --------- ---------
 |         |         |         |
@@ -320,7 +320,7 @@ AI output: 4.
  --------- --------- ---------
 ```
 
-```shell
+```
 AI output: 8.
  --------- --------- ---------
 |         |         |         |
