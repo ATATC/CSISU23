@@ -8,8 +8,6 @@ class TicTacToeRS(RuleSet):
         self.board: Optional[TicTacToeBoard] = None
 
     def post_piece_down(self, x: int, y: int, p_index: int):
-        if self.board.get_round_counter() == self.board.get_width() * self.board.get_height():
-            raise Tied()
         if (x + y) % 2 == 0 and (self.board.diagonal(0, True).count(p_index)
                                  == min(self.board.get_width(), self.board.get_height())
                                  or self.board.diagonal(2, False).count(p_index)
@@ -18,6 +16,8 @@ class TicTacToeRS(RuleSet):
         if self.board.row(y).count(p_index) == self.board.get_width() \
                 or self.board.column(x).count(p_index) == self.board.get_height():
             raise GameOver(p_index)
+        if self.board.get_round_counter() == self.board.get_width() * self.board.get_height():
+            raise Tied()
 
 
 class TicTacToeBoard(Board):
