@@ -115,8 +115,7 @@ class Board(object):
         y = 0
         for x in (range(from_x, self._width) if towards_right else range(from_x, -1, -1)):
             r.append(self[(x, y)])
-            y += 1
-            if y >= self._height:
+            if (y := y + 1) >= self._height:
                 break
         return r
 
