@@ -31,11 +31,7 @@ class TicTacToeBoard(Board):
         rule_set.board = self
 
     def get_piece_symbol(self, p_index: int) -> str:
-        return {
-            -1: " ",
-            0: "X",
-            1: "O",
-        }[p_index]
+        return (" ", "X", "O")[p_index + 1]
 
 
 class HumanPlayer(Player):
