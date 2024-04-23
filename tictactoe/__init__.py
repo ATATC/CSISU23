@@ -74,7 +74,7 @@ def for_each_line(board: TicTacToeBoard, pi: int, opi: int, action: Callable) ->
 
 class Bot(Player):
     """
-    Works only when the board is 3x3.
+    Note that this works only when the board is 3x3.
     """
     def decide(self, board: TicTacToeBoard) -> [int, int]:
         if board.get_round_counter() >= 9:

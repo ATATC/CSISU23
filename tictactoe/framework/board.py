@@ -97,6 +97,13 @@ class Board(object):
             raise _InvalidStep
 
     def go(self, x: int, y: int, p_index: int, override: bool = False):
+        """
+        Place a chess piece at the specified position.
+        :param x: the row index
+        :param y: the column index
+        :param p_index: the piece index
+        :param override: True: place it anyway; False: raise `_InvalidStep` if position is already occupied
+        """
         self._check_p_index(p_index)
         self._rs.on_piece_down(x, y, p_index)
         self.check_index(x, y, override)
@@ -105,12 +112,28 @@ class Board(object):
         self._rs.post_piece_down(x, y, p_index)
 
     def row(self, index: int) -> list[int]:
+        """
+        Get a row.
+        :param index: the row index
+        :return: the row
+        """
         return _copy(self._p_map[index])
 
     def column(self, index: int) -> list[int]:
+        """
+        Get a column.
+        :param index: the column index
+        :return: the column
+        """
         return [self._p_map[i][index] for i in range(self._height)]
 
     def diagonal(self, from_x: int, towards_right: bool = True) -> list[int]:
+        """
+        Get a diagonal.
+        :param from_x: the row index
+        :param towards_right: True: from left to right; False: from right to left
+        :return: the diagonal
+        """
         r = []
         y = 0
         for x in (range(from_x, self._width) if towards_right else range(from_x, -1, -1)):

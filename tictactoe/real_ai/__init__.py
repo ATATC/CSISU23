@@ -8,7 +8,7 @@ from torch import load as _load, no_grad as _no_grad, where as _where, Tensor as
 
 class AI(Player):
     """
-    Works only when the board is 3x3.
+    Note that this works only when the board is 3x3.
     """
     def __init__(self, model: RealAI, name: str, p_index: int):
         super().__init__(name, p_index)
