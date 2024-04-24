@@ -115,7 +115,7 @@ class Board(object):
         """
         Get a row.
         :param index: the row index
-        :return: the row
+        :return: the row with piece indexes
         """
         return _copy(self._p_map[index])
 
@@ -123,7 +123,7 @@ class Board(object):
         """
         Get a column.
         :param index: the column index
-        :return: the column
+        :return: the column with piece indexes
         """
         return [self._p_map[i][index] for i in range(self._height)]
 
@@ -132,7 +132,7 @@ class Board(object):
         Get a diagonal.
         :param from_x: the row index
         :param towards_right: True: from left to right; False: from right to left
-        :return: the diagonal
+        :return: the diagonal with piece indexes
         """
         r = []
         y = 0
